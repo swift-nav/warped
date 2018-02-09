@@ -7,8 +7,8 @@ module Network.Warped.Types.Alias
   ( module Network.Warped.Types.Alias
   ) where
 
-import Network.Warped.Prelude
 import Network.Wai
+import Network.Warped.Prelude
 
 -- | Respond
 --
