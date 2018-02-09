@@ -43,7 +43,7 @@ To build, install, run, and test `warped`, the following dependencies may be req
 
 
 [warped]:      https://github.com/swift-nav/warped
-[warped-img]:  https://cloud.githubusercontent.com/assets/60851/8178609/a077a326-13c4-11e5-9d54-3e417fc6dd6c.jpg
+[warped-img]:  https://user-images.githubusercontent.com/60851/36055206-a30e4bac-0daf-11e8-888b-a0bc886ce12c.jpg
 [hackage]:     https://hackage.haskell.org/package/warped
 [hackage-img]: https://img.shields.io/hackage/v/warped.svg?style=flat
 [travis]:      https://travis-ci.org/swift-nav/warped
