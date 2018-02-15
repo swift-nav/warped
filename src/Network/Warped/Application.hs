@@ -18,12 +18,14 @@ module Network.Warped.Application
   , answer
   , answerStatus
   , answerSource
+  , answerJson
   , withHeader
   ) where
 
 import Blaze.ByteString.Builder
 import Control.Concurrent.Async.Lifted
 import Control.Monad.Trans.Control
+import Data.Aeson
 import Data.Conduit
 import Data.UUID                       hiding (fromByteString)
 import Network.HTTP.Types
@@ -107,7 +109,7 @@ answer response = do
 answerStatus :: MonadWai c m => Status -> ResponseHeaders -> m ResponseReceived
 answerStatus status headers = do
   sessionUid <- view wcSessionUid
-  let headers' = (hSessionUid, toASCIIBytes sessionUid) : headers
+  let headers' = hSessionUid =. toASCIIBytes sessionUid : headers
   answer $ responseLBS status headers' mempty
 
 -- | Stream response.
@@ -115,8 +117,16 @@ answerStatus status headers = do
 answerSource :: MonadWai c m => Status -> ResponseHeaders -> Source IO (Flush Builder) -> m ResponseReceived
 answerSource status headers response = do
   sessionUid <- view wcSessionUid
-  let headers' = (hSessionUid, toASCIIBytes sessionUid) : headers
+  let headers' = hSessionUid =. toASCIIBytes sessionUid : headers
   answer $ responseSource status headers' response
+
+-- | JSON response.
+--
+answerJson :: (MonadWai c m, ToJSON a) => Status -> ResponseHeaders -> a -> m ResponseReceived
+answerJson status headers value = do
+  sessionUid <- view wcSessionUid
+  let headers' = hSessionUid =. toASCIIBytes sessionUid : headers
+  answer $ responseLBS status headers' $ encode value
 
 -- | Lookup header.
 --

@@ -27,7 +27,8 @@ library
                      , Network.Warped.Types.Ctx
   ghc-options:         -Wall
   default-language:    Haskell2010
-  build-depends:       base >= 4.9 && < 5
+  build-depends:       aeson
+                     , base >= 4.9 && < 5
                      , blaze-builder
                      , conduit
                      , http-types
