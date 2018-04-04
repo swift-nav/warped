@@ -40,10 +40,3 @@ library
                      , wai-conduit
                      , wai-cors
                      , warp
-
-executable shake-wolf
-  main-is:             Shakefile.hs
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N -Wall
-  default-language:    Haskell2010
-  build-depends:       base >= 4.9 && < 5
-                     , shakers
