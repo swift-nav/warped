@@ -1,5 +1,5 @@
 name:                  warped
-version:               0.0.3
+version:               0.0.4
 synopsis:              Warp and Wai Library.
 description:           Library support around WAI and warp server.
 homepage:              https://github.com/swift-nav/warped
