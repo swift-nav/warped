@@ -13,3 +13,4 @@ import Preamble as Exports
 --
 lookupDefault :: Eq a => b -> a -> [(a, b)] -> b
 lookupDefault b a m = fromMaybe b $ lookup a m
+

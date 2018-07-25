@@ -43,7 +43,7 @@ hSessionUid = "Session-Uid"
 
 -- | A Conduit for converting a ByteString to a Flush Builder.
 --
-flushBuilder :: Monad m => Conduit ByteString m (Flush Builder)
+flushBuilder :: Monad m => ConduitT ByteString (Flush Builder) m ()
 flushBuilder = awaitForever $ \chunk -> do
   yield $ Chunk $ fromByteString chunk
   yield Flush
@@ -114,7 +114,7 @@ answerStatus status headers = do
 
 -- | Stream response.
 --
-answerSource :: MonadWai c m => Status -> ResponseHeaders -> Source IO (Flush Builder) -> m ResponseReceived
+answerSource :: MonadWai c m => Status -> ResponseHeaders -> ConduitT () (Flush Builder) IO () -> m ResponseReceived
 answerSource status headers response = do
   sessionUid <- view wcSessionUid
   let headers' = hSessionUid =. toASCIIBytes sessionUid : headers
